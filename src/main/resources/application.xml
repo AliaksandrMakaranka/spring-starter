@@ -3,6 +3,25 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-        <bean id="poll1" name="p1" class="com.skynet.spring.database.pool.ConnectionPoll"/>
-        <bean id="poll2" class="com.skynet.spring.database.pool.ConnectionPoll"/>
+    <bean id="driver" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="PostgresDriver"/>
+    </bean>
+
+    <bean id="poll1" name="p1" class="com.skynet.spring.database.pool.ConnectionPoll">
+        <constructor-arg name="username" type="java.lang.String" value="postgres"/>
+        <constructor-arg name="pollSize" type="java.lang.Integer" value="10"/>
+        <constructor-arg name="args" type="java.util.List">
+            <list>
+                <value>--args1=value1</value>
+                <value>--args2=value2</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg name="properties" type="java.util.Map">
+            <map>
+                <entry key="url" value="postgressurl"/>
+                <entry key="password" value="123"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    <!--        <bean id="poll2" class="com.skynet.spring.database.pool.ConnectionPoll"/>-->
 </beans>
