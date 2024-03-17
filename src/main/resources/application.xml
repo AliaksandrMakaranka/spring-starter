@@ -8,20 +8,26 @@
     </bean>
 
     <bean id="poll1" name="p1" class="com.skynet.spring.database.pool.ConnectionPoll">
-        <constructor-arg name="username" type="java.lang.String" value="postgres"/>
+        <constructor-arg name="username" type="java.lang.String" ref="driver"/>
         <constructor-arg name="pollSize" type="java.lang.Integer" value="10"/>
         <constructor-arg name="args" type="java.util.List">
             <list>
                 <value>--args1=value1</value>
                 <value>--args2=value2</value>
+                <ref bean="driver"/>
             </list>
         </constructor-arg>
         <constructor-arg name="properties" type="java.util.Map">
             <map>
                 <entry key="url" value="postgressurl"/>
                 <entry key="password" value="123"/>
+                <entry key="driver" value-ref="driver"/>
             </map>
         </constructor-arg>
+    </bean>
+
+    <bean id="companyRepository" class="com.skynet.spring.database.repository.CompanyRepository" factory-method="of">
+        <constructor-arg ref="poll1"/>
     </bean>
     <!--        <bean id="poll2" class="com.skynet.spring.database.pool.ConnectionPoll"/>-->
 </beans>
