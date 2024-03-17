@@ -8,4 +8,9 @@ public class CompanyRepository {
     public CompanyRepository(ConnectionPoll connectionPoll) {
         this.connectionPoll = connectionPoll;
     }
+
+    public static CompanyRepository of(ConnectionPoll connectionPoll) {
+        return new CompanyRepository(connectionPoll);
+    }
+
 }
